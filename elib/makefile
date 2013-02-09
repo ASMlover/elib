@@ -8,7 +8,8 @@ MD	= mkdir -p
 CP	= cp 
 CFLAGS	= -g -O2 -Wall 
 ELIB_OBJS = ./src/el_error.o\
-	./src/el_time.o
+	./src/el_time.o\
+	./src/posix/el_mutex.o
 
 
 all: lib 
