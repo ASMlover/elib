@@ -31,6 +31,7 @@
 
 #define EL_OK         (0)
 #define EL_EINVALID   (1)
+#define EL_ENOMEM     (2)
 
 extern const char* el_strerror(int err);
 

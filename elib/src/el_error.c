@@ -30,7 +30,6 @@
 #include "../inc/el_error.h"
 
 
-//! need thread mutex locking
 
 const char* 
 el_strerror(int err)
@@ -38,6 +37,7 @@ el_strerror(int err)
   static const char* err_msg[] = {
     "Success", 
     "Arguments Invalid", 
+    "Unable to allocate memory"
 
     "Unknown", 
   };
