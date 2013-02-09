@@ -1,3 +1,7 @@
 2013/02/09	ASMlover	<asmlover@126.com>
+	* Added error operation module.
+	* Added mutex operation module.
+
+2013/02/09	ASMlover	<asmlover@126.com>
 ----------------------------------------
 	* Starts working on elib.
