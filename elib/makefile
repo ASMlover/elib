@@ -9,7 +9,8 @@ CP	= cp
 CFLAGS	= -g -O2 -Wall 
 ELIB_OBJS = ./src/el_error.o\
 	./src/el_time.o\
-	./src/posix/el_mutex.o
+	./src/posix/el_mutex.o\
+	./src/posix/el_time.o
 
 
 all: lib 

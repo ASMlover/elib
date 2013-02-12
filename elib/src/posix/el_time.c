@@ -26,33 +26,15 @@
  * ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
-#include <sys/timeb.h>
 #include <sys/time.h>
-#include <time.h>
-#include "../inc/el_error.h"
-#include "../inc/el_time.h"
+#include "../../inc/el_time.h"
 
 
-
-int 
-el_localtime(el_time_t* time)
+int32_t 
+el_clock(void) 
 {
-  if (NULL == time)
-    return EL_EINVALID;
-  else {
-    struct timeb tb;
-    struct tm*   now;
+  struct timeval tv;
 
-    ftime(&tb);
-    now = localtime(&tb.time);
-    time->year = (uint16_t)(now->tm_year + 1900);
-    time->mon  = (uint8_t)(now->tm_mon + 1);
-    time->day  = (uint8_t)(now->tm_mday);
-    time->hour = (uint8_t)(now->tm_hour);
-    time->min  = (uint8_t)(now->tm_min);
-    time->sec  = (uint8_t)(now->tm_sec);
-    time->millitm = (uint16_t)tb.millitm;
-
-    return EL_OK;
-  }
+  gettimeofday(&tv, (void*)0);
+  return (((tv.tv_sec - 1000000000) * 1000) + (tv.tv_usec / 1000));
 }
