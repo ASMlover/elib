@@ -27,6 +27,7 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 #include <sys/timeb.h>
+#include <sys/time.h>
 #include <time.h>
 #include "../inc/el_error.h"
 #include "../inc/el_time.h"
@@ -54,4 +55,14 @@ el_localtime(el_time_t* time)
 
     return EL_OK;
   }
+}
+
+
+int32_t 
+el_clock(void) 
+{
+  struct timeval tv;
+
+  gettimeofday(&tv, NULL);
+  return (((tv.tv_sec - 1000000000) * 1000) + (tv.tv_usec / 1000));
 }

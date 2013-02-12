@@ -45,5 +45,6 @@ typedef struct el_time_s {
 
 
 extern int el_localtime(el_time_t* time);
+extern int32_t el_clock(void);    // as timeGetTime
 
 #endif  /* __ELIB_TIME_HEADER_H__ */
