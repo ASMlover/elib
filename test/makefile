@@ -1,7 +1,10 @@
 BIN_OUT	= elib-test
 BIN_DIR	= ../bin 
 CC	= gcc
-CFLAGS	+= -g -O2 -Wall 
+CFLAGS   += -g -O2 -Wall 
+INCLUDES += -I../elib/inc 
+LDDIRS	= -L../elib/lib
+LDFLAGS = -levil
 RM	= rm 
 MD	= mkdir -p
 RD	= rm -rf
@@ -30,7 +33,7 @@ clean:
 
 
 $(BIN_OUT): $(TEST_OBJS)
-	$(CC) -o $@ $^
+	$(CC) -o $@ $^ $(LDDIRS) $(LDFLAGS)
 
 $(TEST_OBJS): %.o: %.c
-	$(CC) -o $*.o -c $(CFLAGS) $^
+	$(CC) -o $*.o -c $(CFLAGS) $(INCLUDES) $^

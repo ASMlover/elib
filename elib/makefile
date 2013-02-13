@@ -1,5 +1,5 @@
 ELIB_OUT = libevil.a
-ELIB_DIR = ../lib 
+ELIB_DIR = lib 
 CC	= gcc 
 AR	= ar 
 RM	= rm 
