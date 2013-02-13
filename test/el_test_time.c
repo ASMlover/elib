@@ -30,8 +30,35 @@
 #include <el_time.h>
 #include "el_test_header.h"
 
+static void 
+test_localtime(void) 
+{
+  el_time_t time;
+  el_localtime(&time);
+
+  fprintf(stdout, 
+    "Now Time %04d-%02d-%02d %02d:%02d:%02d:%03d\n", 
+    time.year, time.mon, time.day, time.hour, 
+    time.min, time.sec, time.millitm);
+}
+
+static void 
+test_clock(void) 
+{
+  uint32_t beg = el_clock();
+  uint32_t end;
+  int i;
+
+  for (i = 0; i < 10000; ++i)
+    test_localtime();
+  end = el_clock();
+  fprintf(stdout, "time duration[%u ~ %u], use %u\n", beg, end, end - beg);
+}
+
 void 
 el_test_time(void* arg) 
 {
   fprintf(stdout, "enter into function >> `%s`\n", __func__);
+
+  test_clock();
 }
