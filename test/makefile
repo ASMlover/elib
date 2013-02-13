@@ -9,7 +9,8 @@ RM	= rm
 MD	= mkdir -p
 RD	= rm -rf
 CP	= cp 
-TEST_OBJS = test_main.o
+TEST_OBJS = el_test_main.o\
+	el_test_time.o
 
 
 
