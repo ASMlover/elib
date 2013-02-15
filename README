@@ -11,3 +11,6 @@ README for elib
   *nix
     $ cd make/gcc/ 
     $ make
+  Windows
+    \> cd make\msvc\ 
+    \> nmake
