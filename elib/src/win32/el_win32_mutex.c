@@ -40,7 +40,7 @@ static int
 mutex_init(el_mutex_t* mutex) 
 {
   __try {
-    InitiaizeCriticalSection(&mutex->mutex);
+    InitializeCriticalSection(&mutex->mutex);
   }
   __except (STATUS_NO_MEMORY == GetExceptionCode()
     ? EXCEPTION_EXECUTE_HANDLER : EXCEPTION_CONTINUE_SEARCH) {
@@ -57,7 +57,7 @@ mutex_lock(el_mutex_t* mutex)
     EnterCriticalSection(&mutex->mutex);
   }
   __except (STATUS_INVALID_HANDLE == GetExceptionCode() 
-    || STATUS_NO_MEMORY == GetExceptionCode
+    || STATUS_NO_MEMORY == GetExceptionCode()
     ? EXCEPTION_EXECUTE_HANDLER : EXCEPTION_CONTINUE_SEARCH) {
     return (STATUS_NO_MEMORY == GetExceptionCode()
       ? ERROR_OUTOFMEMORY : ERROR_INVALID_HANDLE);

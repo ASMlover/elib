@@ -27,7 +27,6 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 #include <sys/timeb.h>
-#include <sys/time.h>
 #include <time.h>
 #include "../inc/el_error.h"
 #include "../inc/el_time.h"
