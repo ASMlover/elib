@@ -54,11 +54,7 @@ void
 el_mutex_delete(el_mutex_t** mutex) 
 {
   if (NULL != *mutex) {
-    int ret;
-    do {
-      ret = pthread_mutex_destroy(&(*mutex)->mutex);
-    } while (EINTR == ret);
-
+    pthread_mutex_destroy(&(*mutex)->mutex);
     free(*mutex);
     *mutex = NULL;
   }
@@ -67,24 +63,15 @@ el_mutex_delete(el_mutex_t** mutex)
 void 
 el_mutex_lock(el_mutex_t* mutex) 
 {
-  if (NULL != mutex) {
-    int ret;
-    do {
-      ret = pthread_mutex_lock(&mutex->mutex);
-    } while (EINTR == ret);
-  }
+  if (NULL != mutex) 
+    pthread_mutex_lock(&mutex->mutex);
 }
 
 int 
 el_mutex_trylock(el_mutex_t* mutex)
 {
   if (NULL != mutex) {
-    int ret;
-    do {
-      ret = pthread_mutex_trylock(&mutex->mutex);
-    } while (EINTR == ret);
-
-    if (0 == ret)
+    if (0 == pthread_mutex_trylock(&mutex->mutex))
       return EL_OK;
   }
 
@@ -94,10 +81,6 @@ el_mutex_trylock(el_mutex_t* mutex)
 void 
 el_mutex_unlock(el_mutex_t* mutex) 
 {
-  if (NULL != mutex) {
-    int ret;
-    do {
-      ret = pthread_mutex_unlock(&mutex->mutex);
-    } while (EINTR == ret);
-  }
+  if (NULL != mutex) 
+    pthread_mutex_unlock(&mutex->mutex);
 }
