@@ -29,6 +29,7 @@
 #include <pthread.h>
 #include <errno.h>
 #include <stdlib.h>
+#include "../../inc/el_error.h"
 #include "../../inc/el_mutex.h"
 
 
@@ -72,6 +73,22 @@ el_mutex_lock(el_mutex_t* mutex)
       ret = pthread_mutex_lock(&mutex->mutex);
     } while (EINTR == ret);
   }
+}
+
+int 
+el_mutex_trylock(el_mutex_t* mutex)
+{
+  if (NULL != mutex) {
+    int ret;
+    do {
+      ret = pthread_mutex_trylock(&mutex->mutex);
+    } while (EINTR == ret);
+
+    if (0 == ret)
+      return EL_OK;
+  }
+
+  return EL_NO;
 }
 
 void 

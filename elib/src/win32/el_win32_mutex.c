@@ -27,6 +27,7 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 #include <windows.h>
+#include "../../inc/el_error.h"
 #include "../../inc/el_mutex.h"
 
 
@@ -36,47 +37,13 @@ struct el_mutex_s {
 
 
 
-static int 
-mutex_init(el_mutex_t* mutex) 
-{
-  __try {
-    InitializeCriticalSection(&mutex->mutex);
-  }
-  __except (STATUS_NO_MEMORY == GetExceptionCode()
-    ? EXCEPTION_EXECUTE_HANDLER : EXCEPTION_CONTINUE_SEARCH) {
-    return ERROR_OUTOFMEMORY;
-  }
-
-  return 0;
-}
-
-static int 
-mutex_lock(el_mutex_t* mutex) 
-{
-  __try {
-    EnterCriticalSection(&mutex->mutex);
-  }
-  __except (STATUS_INVALID_HANDLE == GetExceptionCode() 
-    || STATUS_NO_MEMORY == GetExceptionCode()
-    ? EXCEPTION_EXECUTE_HANDLER : EXCEPTION_CONTINUE_SEARCH) {
-    return (STATUS_NO_MEMORY == GetExceptionCode()
-      ? ERROR_OUTOFMEMORY : ERROR_INVALID_HANDLE);
-  }
-
-  return 0;
-}
-
-
-
-
-
 el_mutex_t* 
 el_mutex_create(void) 
 {
   el_mutex_t* mutex = (el_mutex_t*)malloc(sizeof(*mutex));
 
   if (NULL != mutex) 
-    mutex_init(mutex);
+    InitializeCriticalSection(&mutex->mutex);
 
   return mutex;
 }
@@ -95,7 +62,18 @@ void
 el_mutex_lock(el_mutex_t* mutex) 
 {
   if (NULL != mutex) 
-    mutex_lock(mutex);
+    EnterCriticalSection(&mutex->mutex);
+}
+
+int 
+el_mutex_trylock(el_mutex_t* mutex) 
+{
+  if (NULL != mutex) {
+    if (TryEnterCriticalSection(&mutex->mutex))
+      return EL_OK;
+  }
+
+  return EL_NO;
 }
 
 void 

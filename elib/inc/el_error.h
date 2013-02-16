@@ -29,6 +29,7 @@
 #ifndef __ELIB_ERROR_HEADER_H__
 #define __ELIB_ERROR_HEADER_H__
 
+#define EL_NO         (-1)
 #define EL_OK         (0)
 #define EL_EINVALID   (1)
 #define EL_ENOMEM     (2)
