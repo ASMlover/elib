@@ -26,59 +26,41 @@
  * ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
-#include <windows.h>
 #include "../../inc/el_error.h"
 #include "../../inc/el_mutex.h"
 
 
-struct el_mutex_s {
-  CRITICAL_SECTION mutex;
-};
 
-
-
-el_mutex_t* 
-el_mutex_create(void) 
+int 
+el_mutex_init(el_mutex_t* mutex) 
 {
-  el_mutex_t* mutex = (el_mutex_t*)malloc(sizeof(*mutex));
-
-  if (NULL != mutex) 
-    InitializeCriticalSection(&mutex->mutex);
-
-  return mutex;
+  InitializeCriticalSection(mutex);
+  return EL_OK;
 }
 
 void 
-el_mutex_delete(el_mutex_t** mutex) 
+el_mutex_destroy(el_mutex_t* mutex) 
 {
-  if (NULL != *mutex) {
-    DeleteCriticalSection(&(*mutex)->mutex);
-    free(*mutex);
-    *mutex = NULL;
-  }
+  DeleteCriticalSection(mutex);
 }
 
 void 
 el_mutex_lock(el_mutex_t* mutex) 
 {
-  if (NULL != mutex) 
-    EnterCriticalSection(&mutex->mutex);
+  EnterCriticalSection(mutex);
 }
 
 int 
 el_mutex_trylock(el_mutex_t* mutex) 
 {
-  if (NULL != mutex) {
-    if (TryEnterCriticalSection(&mutex->mutex))
-      return EL_OK;
-  }
-
-  return EL_NO;
+  if (TryEnterCriticalSection(mutex))
+    return EL_OK;
+  else
+    return EL_NO;
 }
 
 void 
 el_mutex_unlock(el_mutex_t* mutex) 
 {
-  if (NULL != mutex) 
-    LeaveCriticalSection(&mutex->mutex);
+  LeaveCriticalSection(mutex);
 }

@@ -26,61 +26,50 @@
  * ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
-#include <pthread.h>
 #include <errno.h>
 #include <stdlib.h>
 #include "../../inc/el_error.h"
 #include "../../inc/el_mutex.h"
 
 
-struct el_mutex_s {
-  pthread_mutex_t mutex;
-};
 
-
-
-el_mutex_t* 
-el_mutex_create(void) 
+int 
+el_mutex_init(el_mutex_t* mutex) 
 {
-  el_mutex_t* mutex = (el_mutex_t*)malloc(sizeof(*mutex));
-  
-  if (NULL != mutex)
-    pthread_mutex_init(&mutex->mutex, NULL);
-
-  return mutex;
+  if (0 == pthread_mutex_init(mutex, NULL))
+    return EL_OK;
+  else
+    return EL_NO;
 }
 
 void 
-el_mutex_delete(el_mutex_t** mutex) 
+el_mutex_destroy(el_mutex_t* mutex) 
 {
-  if (NULL != *mutex) {
-    pthread_mutex_destroy(&(*mutex)->mutex);
-    free(*mutex);
-    *mutex = NULL;
-  }
+  if (0 != pthread_mutex_destroy(mutex))
+    abort();
 }
 
 void 
 el_mutex_lock(el_mutex_t* mutex) 
 {
-  if (NULL != mutex) 
-    pthread_mutex_lock(&mutex->mutex);
+  if (0 != pthread_mutex_lock(mutex))
+    abort();
 }
 
 int 
 el_mutex_trylock(el_mutex_t* mutex)
 {
-  if (NULL != mutex) {
-    if (0 == pthread_mutex_trylock(&mutex->mutex))
-      return EL_OK;
-  }
+  int ret = pthread_mutex_trylock(mutex);
 
-  return EL_NO;
+  if (0 != ret && EBUSY != ret && EAGAIN != ret)
+    abort();
+
+  return (0 == ret ? EL_OK : EL_NO);
 }
 
 void 
 el_mutex_unlock(el_mutex_t* mutex) 
 {
-  if (NULL != mutex) 
-    pthread_mutex_unlock(&mutex->mutex);
+  if (0 != pthread_mutex_unlock(mutex))
+    abort();
 }

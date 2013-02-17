@@ -29,9 +29,14 @@
 #ifndef __ELIB_RWLOCK_HEADER_H__
 #define __ELIB_RWLOCK_HEADER_H__
 
-typedef struct el_rwlock_s el_rwlock_t;
+#if (defined(_WIN32) || defined(_WIN64))
+  #include "./win32/el_win32_rwlock.h"
+#else 
+  #include "./posix/el_posix_rwlock.h"
+#endif
 
-extern el_rwlock_t* el_rwlock_create(void);
+
+extern int el_rwlock_init(el_rwlock_t* rwlock);
 extern void el_rwlock_delete(el_rwlock_t** rwlock);
 extern void el_rwlock_rdlock(el_rwlock_t* rwlock);
 extern int el_rwlock_tryrdlock(el_rwlock_t* rwlock);

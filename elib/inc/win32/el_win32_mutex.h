@@ -8,8 +8,8 @@
  *  * Redistributions of source code must retain the above copyright
  *    notice, this list ofconditions and the following disclaimer.
  *
- *    notice, this list of conditions and the following disclaimer in
  *  * Redistributions in binary form must reproduce the above copyright
+ *    notice, this list of conditions and the following disclaimer in
  *    the documentation and/or other materialsprovided with the
  *    distribution.
  *
@@ -26,19 +26,6 @@
  * ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
-#ifndef __ELIB_MUTEX_HEADER_H__
-#define __ELIB_MUTEX_HEADER_H__
+#include <windows.h>
 
-#if (defined(_WIN32) || defined(_WIN64))
-  #include "./win32/el_win32_mutex.h"
-#else
-  #include "./posix/el_posix_mutex.h"
-#endif
-
-extern int el_mutex_init(el_mutex_t* mutex);
-extern void el_mutex_destroy(el_mutex_t* mutex);
-extern void el_mutex_lock(el_mutex_t* mutex);
-extern int el_mutex_trylock(el_mutex_t* mutex);
-extern void el_mutex_unlock(el_mutex_t* mutex);
-
-#endif  /* __ELIB_MUTEX_HEADER_H__ */
+typedef CRITICAL_SECTION el_mutex_t;
