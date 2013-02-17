@@ -8,8 +8,8 @@
  *  * Redistributions of source code must retain the above copyright
  *    notice, this list ofconditions and the following disclaimer.
  *
- *    notice, this list of conditions and the following disclaimer in
  *  * Redistributions in binary form must reproduce the above copyright
+ *    notice, this list of conditions and the following disclaimer in
  *    the documentation and/or other materialsprovided with the
  *    distribution.
  *
@@ -26,23 +26,75 @@
  * ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
-#ifndef __ELIB_RWLOCK_HEADER_H__
-#define __ELIB_RWLOCK_HEADER_H__
-
-#if (defined(_WIN32) || defined(_WIN64))
-  #include "./win32/el_win32_rwlock.h"
-#else 
-  #include "./posix/el_posix_rwlock.h"
-#endif
+#include <errno.h>
+#include <stdio.h>
+#include "../../inc/el_error.h"
+#include "../../inc/el_rwlock.h"
 
 
-extern int el_rwlock_init(el_rwlock_t* rwlock);
-extern void el_rwlock_destroy(el_rwlock_t* rwlock);
-extern void el_rwlock_rdlock(el_rwlock_t* rwlock);
-extern int el_rwlock_tryrdlock(el_rwlock_t* rwlock);
-extern void el_rwlock_rdunlock(el_rwlock_t* rwlock);
-extern void el_rwlock_wrlock(el_rwlock_t* rwlock);
-extern int el_rwlock_trywrlock(el_rwlock_t* rwlock);
-extern void el_rwlock_wrunlock(el_rwlock_t* rwlock);
 
-#endif  /* __ELIB_RWLOCK_HEADER_H__ */
+int 
+el_rwlock_init(el_rwlock_t* rwlock)
+{
+  if (0 == pthread_rwlock_init(rwlock, NULL))
+    return EL_OK;
+  else 
+    return EL_NO;
+}
+
+void 
+el_rwlock_destroy(el_rwlock_t* rwlock)
+{
+  if (0 != pthread_rwlock_destroy(rwlock))
+    abort();
+}
+
+void 
+el_rwlock_rdlock(el_rwlock_t* rwlock)
+{
+  if (0 != pthread_rwlock_rdlock(rwlock))
+    abort();
+}
+
+int 
+el_rwlock_tryrdlock(el_rwlock_t* rwlock)
+{
+  int ret = pthread_rwlock_tryrdlock(rwlock);
+
+  if (0 != ret && EBUSY != ret && EAGAIN != ret)
+    abort();
+
+  return (0 == ret ? EL_OK : EL_NO);
+}
+
+void 
+el_rwlock_rdunlock(el_rwlock_t* rwlock)
+{
+  if (0 != pthread_rwlock_unlock(rwlock))
+    abort();
+}
+
+void 
+el_rwlock_wrlock(el_rwlock_t* rwlock)
+{
+  if (0 != pthread_rwlock_wrlock(rwlock))
+    abort();
+}
+
+int 
+el_rwlock_trywrlock(el_rwlock_t* rwlock)
+{
+  int ret = pthread_rwlock_trywrlock(rwlock);
+
+  if (0 != ret && EBUSY != ret && EAGAIN != ret)
+    abort();
+
+  return (0 == ret ? EL_OK : EL_NO);
+}
+
+void 
+el_rwlock_wrunlock(el_rwlock_t* rwlock)
+{
+  if (0 != pthread_rwlock_unlock(rwlock))
+    abort();
+}
