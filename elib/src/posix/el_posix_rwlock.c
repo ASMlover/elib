@@ -27,7 +27,7 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 #include <errno.h>
-#include <stdio.h>
+#include <stdlib.h>
 #include "../../inc/el_error.h"
 #include "../../inc/el_rwlock.h"
 

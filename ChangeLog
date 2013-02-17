@@ -1,3 +1,8 @@
+2013/02/17  ASMlover  <asmlover@126.com>
+----------------------------------------
+  * Updated mutex operation module.
+  * Added rwlock operation module.
+
 2013/02/09  ASMlover  <asmlover@126.com>
 ----------------------------------------
   * Added error operation module.
