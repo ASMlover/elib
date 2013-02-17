@@ -8,8 +8,8 @@
  *  * Redistributions of source code must retain the above copyright
  *    notice, this list ofconditions and the following disclaimer.
  *
- *    notice, this list of conditions and the following disclaimer in
  *  * Redistributions in binary form must reproduce the above copyright
+ *    notice, this list of conditions and the following disclaimer in
  *    the documentation and/or other materialsprovided with the
  *    distribution.
  *
@@ -26,26 +26,11 @@
  * ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
-#ifndef __ELIB_COMMON_HEADER_H__
-#define __ELIB_COMMON_HEADER_H__
 
-#if (defined(_WIN32) || defined(_WIN64))
-  typedef __int8            int8_t;
-  typedef unsigned __int8   uint8_t;
-  typedef __int16           int16_t;
-  typedef unsigned __int16  uint16_t;
-  typedef __int32           int32_t;
-  typedef unsigned __int32  uint32_t;
-  typedef __int64           int64_t;
-  typedef unsigned __int64  uint64_t;
-#else
-  #include <stdint.h>
-#endif 
+typedef struct win32_version_s {
+  unsigned int major;
+  unsigned int minor;
+} win32_version_t;
 
-#if defined(_MSC_VER)
-  #define inline __inline
-#endif
 
-#define countof(s)    (sizeof((s)) / sizeof(*(s)))
-
-#endif  /* __ELIB_COMMON_HEADER_H__ */
+extern win32_version_t* win32_get_version(void);

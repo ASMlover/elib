@@ -29,7 +29,9 @@
 #include <windows.h>
 
 typedef union el_rwlock_u {
+#if (_MSC_VER >= 1600)
   SRWLOCK srwlock;
+#endif
   struct {
     CRITICAL_SECTION rd_mutex;
     CRITICAL_SECTION wr_mutex;
