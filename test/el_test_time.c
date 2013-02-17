@@ -26,9 +26,20 @@
  * ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
+#if (defined(_WIN32) || defined(_WIN64))
+  #include <windows.h>
+#else
+  #include <unistd.h>
+#endif
 #include <stdio.h>
 #include <el_time.h>
 #include "el_test_header.h"
+
+
+#if (defined(_WIN32) || defined(_WIN64))
+  #define sleep(n)  Sleep(n * 1000)
+#endif
+
 
 static void 
 test_localtime(void) 
@@ -51,6 +62,11 @@ test_clock(void)
 
   for (i = 0; i < 10000; ++i)
     test_localtime();
+  end = el_clock();
+  fprintf(stdout, "time duration[%u ~ %u], use %u\n", beg, end, end - beg);
+
+  beg = el_clock();
+  sleep(1);
   end = el_clock();
   fprintf(stdout, "time duration[%u ~ %u], use %u\n", beg, end, end - beg);
 }
