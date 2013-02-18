@@ -26,6 +26,8 @@
  * ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
+#ifndef __ELIB_WIN32_INTERNAL_HEADER_H__
+#define __ELIB_WIN32_INTERNAL_HEADER_H__
 
 typedef struct win32_version_s {
   unsigned int major;
@@ -34,3 +36,5 @@ typedef struct win32_version_s {
 
 
 extern win32_version_t* win32_get_version(void);
+
+#endif  /* __ELIB_WIN32_INTERNAL_HEADER_H__ */

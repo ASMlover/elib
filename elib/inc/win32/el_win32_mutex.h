@@ -26,6 +26,11 @@
  * ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
+#ifndef __ELIB_WIN32_MUTEX_HEADER_H__ 
+#define __ELIB_WIN32_MUTEX_HEADER_H__ 
+
 #include <windows.h>
 
 typedef CRITICAL_SECTION el_mutex_t;
+
+#endif  /* __ELIB_WIN32_MUTEX_HEADER_H__ */

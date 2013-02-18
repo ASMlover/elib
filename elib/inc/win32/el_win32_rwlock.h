@@ -26,6 +26,9 @@
  * ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
+#ifndef __ELIB_WIN32_RWLOCK_HEADER_H__
+#define __ELIB_WIN32_RWLOCK_HEADER_H__ 
+
 #include <windows.h>
 
 typedef union el_rwlock_u {
@@ -38,3 +41,5 @@ typedef union el_rwlock_u {
     unsigned int     num_readers;
   } self_rwlock;
 } el_rwlock_t;
+
+#endif  /* __ELIB_WIN32_RWLOCK_HEADER_H__ */

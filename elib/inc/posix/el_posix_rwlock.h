@@ -26,6 +26,11 @@
  * ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
+#ifndef __ELIB_POSIX_RWLOCK_HEADER_H__
+#define __ELIB_POSIX_RWLOCK_HEADER_H__ 
+
 #include <pthread.h>
 
 typedef pthread_rwlock_t el_rwlock_t;
+
+#endif  /* __ELIB_POSIX_RWLOCK_HEADER_H__ */
