@@ -1,3 +1,7 @@
+2013/02/18  ASMlover  <asmlover@126.com>
+----------------------------------------
+  * Added semaphore module.
+
 2013/02/17  ASMlover  <asmlover@126.com>
 ----------------------------------------
   * Updated mutex operation module.
