@@ -26,7 +26,6 @@
  * ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
-#include "../../inc/el_common.h"
 #include "../../inc/win32/el_win32_internal.h"
 #include "../../inc/el_error.h"
 #include "../../inc/el_rwlock.h"
@@ -38,7 +37,7 @@ static win32_version_t s_version;
   ((_MSC_VER >= 1600) && (s_version.major >= 6 && s_version.minor >= 1))
 
 
-static inline int 
+static inline int32_t 
 el_rwlock_srwlock_init(el_rwlock_t* rwlock)
 {
 #if (_MSC_VER >= 1600)
@@ -61,7 +60,7 @@ el_rwlock_srwlock_rdlock(el_rwlock_t* rwlock)
 #endif
 }
 
-static inline int 
+static inline int32_t 
 el_rwlock_srwlock_tryrdlock(el_rwlock_t* rwlock)
 {
 #if (_MSC_VER >= 1600)
@@ -87,7 +86,7 @@ el_rwlock_srwlock_wrlock(el_rwlock_t* rwlock)
 #endif
 }
 
-static inline int 
+static inline int32_t 
 el_rwlock_srwlock_trywrlock(el_rwlock_t* rwlock) 
 {
 #if (_MSC_VER >= 1600)
@@ -105,7 +104,7 @@ el_rwlock_srwlock_wrunlock(el_rwlock_t* rwlock)
 #endif
 }
 
-static inline int 
+static inline int32_t 
 el_rwlock_self_rwlock_init(el_rwlock_t* rwlock)
 {
   InitializeCriticalSection(&rwlock->self_rwlock.rd_mutex);
@@ -133,7 +132,7 @@ el_rwlock_self_rwlock_rdlock(el_rwlock_t* rwlock)
   LeaveCriticalSection(&rwlock->self_rwlock.rd_mutex);
 }
 
-static inline int 
+static inline int32_t 
 el_rwlock_self_rwlock_tryrdlock(el_rwlock_t* rwlock)
 {
   int ret = EL_NO;
@@ -173,7 +172,7 @@ el_rwlock_self_rwlock_wrlock(el_rwlock_t* rwlock)
   EnterCriticalSection(&rwlock->self_rwlock.wr_mutex);
 }
 
-static inline int 
+static inline int32_t 
 el_rwlock_self_rwlock_trywrlock(el_rwlock_t* rwlock)
 {
   if (TryEnterCriticalSection(&rwlock->self_rwlock.wr_mutex))
@@ -191,7 +190,7 @@ el_rwlock_self_rwlock_wrunlock(el_rwlock_t* rwlock)
 
 
 
-int 
+int32_t 
 el_rwlock_init(el_rwlock_t* rwlock)
 {
   s_version = *win32_get_version();
@@ -220,7 +219,7 @@ el_rwlock_rdlock(el_rwlock_t* rwlock)
     el_rwlock_self_rwlock_rdlock(rwlock);
 }
 
-int 
+int32_t 
 el_rwlock_tryrdlock(el_rwlock_t* rwlock) 
 {
   if (SRWLOCK_API_VALID())
@@ -247,7 +246,7 @@ el_rwlock_wrlock(el_rwlock_t* rwlock)
     el_rwlock_self_rwlock_wrlock(rwlock);
 }
 
-int 
+int32_t 
 el_rwlock_trywrlock(el_rwlock_t* rwlock)
 {
   if (SRWLOCK_API_VALID())

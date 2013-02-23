@@ -33,8 +33,8 @@
 
 
 
-int 
-el_sem_init(el_sem_t* sem, unsigned int value)
+int32_t 
+el_sem_init(el_sem_t* sem, uint32_t value)
 {
   *sem = CreateSemaphore(NULL, value, INT_MAX, NULL);
 
@@ -62,7 +62,7 @@ el_sem_wait(el_sem_t* sem)
     abort();
 }
 
-int 
+int32_t 
 el_sem_trywait(el_sem_t* sem)
 {
   DWORD ret = WaitForSingleObject(*sem, 0);

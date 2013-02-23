@@ -26,13 +26,12 @@
  * ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
-#include "../inc/el_common.h"
 #include "../inc/el_error.h"
 
 
 
 const char* 
-el_strerror(int err)
+el_strerror(int32_t err)
 {
   static const char* err_msg[] = {
     "Success", 
@@ -42,7 +41,7 @@ el_strerror(int err)
     "Unknown", 
   };
   
-  int unknown = countof(err_msg) - 1;
+  int32_t unknown = countof(err_msg) - 1;
   if (err < EL_OK || err > unknown) 
     return err_msg[unknown];
   else

@@ -33,7 +33,7 @@
 
 
 
-int 
+int32_t 
 el_mutex_init(el_mutex_t* mutex) 
 {
   if (0 == pthread_mutex_init(mutex, NULL))
@@ -56,7 +56,7 @@ el_mutex_lock(el_mutex_t* mutex)
     abort();
 }
 
-int 
+int32_t 
 el_mutex_trylock(el_mutex_t* mutex)
 {
   int ret = pthread_mutex_trylock(mutex);

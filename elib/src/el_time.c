@@ -33,7 +33,7 @@
 
 
 
-int 
+int32_t 
 el_localtime(el_time_t* time)
 {
   if (NULL == time)

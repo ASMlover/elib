@@ -33,7 +33,7 @@
 
 
 
-int 
+int32_t 
 el_rwlock_init(el_rwlock_t* rwlock)
 {
   if (0 == pthread_rwlock_init(rwlock, NULL))
@@ -56,7 +56,7 @@ el_rwlock_rdlock(el_rwlock_t* rwlock)
     abort();
 }
 
-int 
+int32_t 
 el_rwlock_tryrdlock(el_rwlock_t* rwlock)
 {
   int ret = pthread_rwlock_tryrdlock(rwlock);
@@ -81,7 +81,7 @@ el_rwlock_wrlock(el_rwlock_t* rwlock)
     abort();
 }
 
-int 
+int32_t 
 el_rwlock_trywrlock(el_rwlock_t* rwlock)
 {
   int ret = pthread_rwlock_trywrlock(rwlock);

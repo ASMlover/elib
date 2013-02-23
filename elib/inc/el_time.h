@@ -29,7 +29,7 @@
 #ifndef __ELIB_TIME_HEADER_H__
 #define __ELIB_TIME_HEADER_H__ 
 
-#ifndef __ELIB_COMMON_HEADER_H__ 
+#ifndef ELIB_COMMON 
   #include "el_common.h"
 #endif
 
@@ -44,7 +44,7 @@ typedef struct el_time_s {
 } el_time_t;
 
 
-extern int el_localtime(el_time_t* time);
-extern int32_t el_clock(void);
+extern int32_t el_localtime(el_time_t* time);
+extern uint32_t el_clock(void);
 
 #endif  /* __ELIB_TIME_HEADER_H__ */

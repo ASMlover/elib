@@ -29,16 +29,20 @@
 #ifndef __ELIB_SEM_HEADER_H__
 #define __ELIB_SEM_HEADER_H__ 
 
+#ifndef ELIB_COMMON
+  #include "el_common.h"
+#endif
+
 #if (defined(_WIN32) || defined(_WIN64))
   #include "./win32/el_win32_sem.h"
 #else 
   #include "./posix/el_posix_sem.h"
 #endif 
 
-extern int el_sem_init(el_sem_t* sem, unsigned int value);
+extern int32_t el_sem_init(el_sem_t* sem, uint32_t value);
 extern void el_sem_destroy(el_sem_t* sem);
 extern void el_sem_post(el_sem_t* sem);
 extern void el_sem_wait(el_sem_t* sem);
-extern int el_sem_trywait(el_sem_t* sem);
+extern int32_t el_sem_trywait(el_sem_t* sem);
 
 #endif  /* __ELIB_SEM_HEADER_H__ */

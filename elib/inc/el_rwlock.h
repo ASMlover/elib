@@ -27,7 +27,11 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 #ifndef __ELIB_RWLOCK_HEADER_H__
-#define __ELIB_RWLOCK_HEADER_H__
+#define __ELIB_RWLOCK_HEADER_H__ 
+
+#ifndef ELIB_COMMON
+  #include "el_common.h"
+#endif 
 
 #if (defined(_WIN32) || defined(_WIN64))
   #include "./win32/el_win32_rwlock.h"
@@ -36,13 +40,13 @@
 #endif
 
 
-extern int el_rwlock_init(el_rwlock_t* rwlock);
+extern int32_t el_rwlock_init(el_rwlock_t* rwlock);
 extern void el_rwlock_destroy(el_rwlock_t* rwlock);
 extern void el_rwlock_rdlock(el_rwlock_t* rwlock);
-extern int el_rwlock_tryrdlock(el_rwlock_t* rwlock);
+extern int32_t el_rwlock_tryrdlock(el_rwlock_t* rwlock);
 extern void el_rwlock_rdunlock(el_rwlock_t* rwlock);
 extern void el_rwlock_wrlock(el_rwlock_t* rwlock);
-extern int el_rwlock_trywrlock(el_rwlock_t* rwlock);
+extern int32_t el_rwlock_trywrlock(el_rwlock_t* rwlock);
 extern void el_rwlock_wrunlock(el_rwlock_t* rwlock);
 
 #endif  /* __ELIB_RWLOCK_HEADER_H__ */

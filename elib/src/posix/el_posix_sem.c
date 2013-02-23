@@ -32,8 +32,8 @@
 
 
 
-int 
-el_sem_init(el_sem_t* sem, unsigned int value)
+int32_t 
+el_sem_init(el_sem_t* sem, uint32_t value)
 {
   return sem_init(sem, 0, value);
 }
@@ -65,7 +65,7 @@ el_sem_wait(el_sem_t* sem)
     abort();
 }
 
-int 
+int32_t 
 el_sem_trywait(el_sem_t* sem)
 {
   int ret;

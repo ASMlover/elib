@@ -30,7 +30,7 @@
 #include "../../inc/el_time.h"
 
 
-int32_t 
+uint32_t 
 el_clock(void) 
 {
   struct timeval tv;

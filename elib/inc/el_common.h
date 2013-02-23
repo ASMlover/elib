@@ -27,7 +27,10 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 #ifndef __ELIB_COMMON_HEADER_H__
-#define __ELIB_COMMON_HEADER_H__
+#define __ELIB_COMMON_HEADER_H__ 
+
+#ifndef ELIB_COMMON
+#define ELIB_COMMON
 
 #if (defined(_WIN32) || defined(_WIN64))
   typedef __int8            int8_t;
@@ -47,5 +50,8 @@
 #endif
 
 #define countof(s)    (sizeof((s)) / sizeof(*(s)))
+
+
+#endif  /* ELIB_COMMON */
 
 #endif  /* __ELIB_COMMON_HEADER_H__ */

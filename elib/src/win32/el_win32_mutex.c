@@ -31,7 +31,7 @@
 
 
 
-int 
+int32_t 
 el_mutex_init(el_mutex_t* mutex) 
 {
   InitializeCriticalSection(mutex);
@@ -50,7 +50,7 @@ el_mutex_lock(el_mutex_t* mutex)
   EnterCriticalSection(mutex);
 }
 
-int 
+int32_t 
 el_mutex_trylock(el_mutex_t* mutex) 
 {
   if (TryEnterCriticalSection(mutex))

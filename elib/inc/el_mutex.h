@@ -27,7 +27,11 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 #ifndef __ELIB_MUTEX_HEADER_H__
-#define __ELIB_MUTEX_HEADER_H__
+#define __ELIB_MUTEX_HEADER_H__ 
+
+#ifndef ELIB_COMMON 
+  #include "el_common.h"
+#endif 
 
 #if (defined(_WIN32) || defined(_WIN64))
   #include "./win32/el_win32_mutex.h"
@@ -35,10 +39,10 @@
   #include "./posix/el_posix_mutex.h"
 #endif
 
-extern int el_mutex_init(el_mutex_t* mutex);
+extern int32_t el_mutex_init(el_mutex_t* mutex);
 extern void el_mutex_destroy(el_mutex_t* mutex);
 extern void el_mutex_lock(el_mutex_t* mutex);
-extern int el_mutex_trylock(el_mutex_t* mutex);
+extern int32_t el_mutex_trylock(el_mutex_t* mutex);
 extern void el_mutex_unlock(el_mutex_t* mutex);
 
 #endif  /* __ELIB_MUTEX_HEADER_H__ */

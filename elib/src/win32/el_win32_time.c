@@ -35,7 +35,7 @@
 
 
 
-int32_t 
+uint32_t 
 el_clock(void)
 {
   return timeGetTime();
