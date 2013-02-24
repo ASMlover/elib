@@ -26,9 +26,14 @@
  * ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
+#include <stdlib.h>
+#include <errno.h>
 #include "../../inc/el_error.h"
 #include "../../inc/el_cond.h"
 
+
+#undef NANOSEC
+#define NANOSEC ((uint64_t)1e9)
 
 static inline uint64_t 
 el_hrtime(void)
