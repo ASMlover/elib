@@ -43,6 +43,7 @@ ELIB_OBJS = el_error.obj\
 	el_win32_mutex.obj\
 	el_win32_rwlock.obj\
 	el_win32_sem.obj\
+	el_win32_cond.obj\
 	el_win32_thread.obj
 
 

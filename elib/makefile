@@ -40,6 +40,7 @@ ELIB_OBJS = ./src/el_error.o\
 	./src/posix/el_posix_mutex.o\
 	./src/posix/el_posix_rwlock.o\
 	./src/posix/el_posix_sem.o\
+	./src/posix/el_posix_cond.o\
 	./src/posix/el_posix_thread.o
 
 
