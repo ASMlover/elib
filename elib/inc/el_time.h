@@ -47,4 +47,6 @@ typedef struct el_time_s {
 extern int32_t el_localtime(el_time_t* time);
 extern uint32_t el_clock(void);
 
+extern void el_sleep(uint32_t millitm);
+
 #endif  /* __ELIB_TIME_HEADER_H__ */

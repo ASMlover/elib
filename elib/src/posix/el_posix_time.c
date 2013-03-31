@@ -38,3 +38,13 @@ el_clock(void)
   gettimeofday(&tv, (void*)0);
   return (((tv.tv_sec - 1000000000) * 1000) + (tv.tv_usec / 1000));
 }
+
+void 
+el_sleep(uint32_t millitm)
+{
+  struct timespec t;
+
+  t.tv_sec  = millitm / 1000;
+  t.tv_nsec = (millitm % 1000) * 1000000;
+  nanosleep(&t, NULL);
+}

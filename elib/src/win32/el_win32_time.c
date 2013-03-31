@@ -40,3 +40,9 @@ el_clock(void)
 {
   return timeGetTime();
 }
+
+void 
+el_sleep(uint32_t millitm)
+{
+  Sleep(millitm);
+}
