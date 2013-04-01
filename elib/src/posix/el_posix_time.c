@@ -27,6 +27,7 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 #include <sys/time.h>
+#include <time.h>
 #include "../../inc/el_time.h"
 
 
