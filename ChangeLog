@@ -1,3 +1,7 @@
+2013/08/27  ASMlover  <asmlover@126.com>
+----------------------------------------
+  * Added spinlock module.
+
 2013/02/24  ASMlover  <asmlover@126.com>
 ----------------------------------------
   * Added condition module.
