@@ -41,7 +41,8 @@ ELIB_OBJS = ./src/el_error.o\
 	./src/posix/el_posix_rwlock.o\
 	./src/posix/el_posix_sem.o\
 	./src/posix/el_posix_cond.o\
-	./src/posix/el_posix_thread.o
+	./src/posix/el_posix_thread.o\
+	./src/posix/el_posix_spinlock.o
 
 
 all: lib 
