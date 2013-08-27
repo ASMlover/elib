@@ -47,12 +47,18 @@ el_mutex_destroy(el_mutex_t* mutex)
 void 
 el_mutex_lock(el_mutex_t* mutex) 
 {
+  if ((DWORD)mutex->OwningThread == GetCurrentThreadId())
+    return;
+
   EnterCriticalSection(mutex);
 }
 
 int32_t 
 el_mutex_trylock(el_mutex_t* mutex) 
 {
+  if ((DWORD)mutex->OwningThread == GetCurrentThreadId())
+    return EL_OK;
+
   if (TryEnterCriticalSection(mutex))
     return EL_OK;
   else
