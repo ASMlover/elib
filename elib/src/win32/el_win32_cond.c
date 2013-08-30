@@ -181,7 +181,7 @@ el_cond_self_cond_wait_helper(el_cond_t* cond,
 
   if (WAIT_OBJECT_0 == result || (WAIT_OBJECT_0 + 1) == result)
     return EL_OK;
-  if (WAIT_TIMEOUT)
+  if (WAIT_TIMEOUT == result)
     return EL_NO;
 
   abort();
