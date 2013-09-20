@@ -30,26 +30,61 @@
 #define __ELIB_COMMON_HEADER_H__ 
 
 #ifndef ELIB_COMMON
-#define ELIB_COMMON
+#define ELIB_COMMON 
 
-#if (defined(_WIN32) || defined(_WIN64))
-  typedef __int8            int8_t;
-  typedef unsigned __int8   uint8_t;
-  typedef __int16           int16_t;
-  typedef unsigned __int16  uint16_t;
-  typedef __int32           int32_t;
-  typedef unsigned __int32  uint32_t;
-  typedef __int64           int64_t;
-  typedef unsigned __int64  uint64_t;
-#else
-  #include <stdint.h>
-#endif 
 
-#if defined(_MSC_VER)
-  #define inline __inline
+#if defined(_WINDOWS_) || defined(_MSC_VER)
+# if (_MSC_VER < 1600)
+#   if (_MSC_VER < 1300)
+      typedef signed char       int8_t;
+      typedef unsigned char     uint8_t;
+      typedef signed short      int16_t;
+      typedef unsigned short    uint16_t;
+      typedef signed int        int32_t;
+      typedef unsigned int      uint32_t;
+#   else
+      typedef signed __int8     int8_t;
+      typedef unsigned __int8   uint8_t;
+      typedef signed __int16    int16_t;
+      typedef unsigned __int16  uint16_t;
+      typedef signed __int32    int32_t;
+      typedef unsigned __int32  uint32_t;
+#   endif
+    typedef signed __int64      int64_t;
+    typedef unsigned __in64     uint64_t;
+
+#   ifndef _W64
+#     if (!defined(__midl) \
+          && (defined(_X86_) || defined(_M_IX86)) \
+          && _MSC_VER >= 1300)
+#       define _W64 __w64
+#     else
+#       define _W64
+#     endif
+#   endif 
+
+#   ifdef _WIN64 
+      typedef signed __int64      intptr_t;
+      typedef unsigned __int64    uintptr_t
+#   else 
+      typedef _W64 signed int     intptr_t;
+      typedef _W64 unsigned int   uintptr_t;
+#   endif
+# else
+#   include <stdint.h>
+# endif 
+
+# define inline   __inline
+# define __func__ __FUNCTION__
+
+#elif defined(__linux__)
+# include <stdint.h>
 #endif
 
-#define countof(s)    (sizeof((s)) / sizeof(*(s)))
+
+#ifndef countof
+# define countof(s)    (sizeof((s)) / sizeof(*(s)))
+#endif
 
 
 #endif  /* ELIB_COMMON */
