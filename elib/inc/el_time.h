@@ -30,7 +30,7 @@
 #define __ELIB_TIME_HEADER_H__ 
 
 #ifndef ELIB_COMMON 
-  #include "el_common.h"
+# include "el_common.h"
 #endif
 
 typedef struct el_time_s {

@@ -30,7 +30,7 @@
 #define __ELIB_ERROR_HEADER_H__
 
 #ifndef ELIB_COMMON
-  #include "el_common.h"
+# include "el_common.h"
 #endif
 
 #define EL_NO         (-1)

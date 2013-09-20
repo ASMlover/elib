@@ -30,13 +30,13 @@
 #define __ELIB_SEM_HEADER_H__ 
 
 #ifndef ELIB_COMMON
-  #include "el_common.h"
+# include "el_common.h"
 #endif
 
-#if (defined(_WIN32) || defined(_WIN64))
-  #include "./win32/el_win32_sem.h"
-#else 
-  #include "./posix/el_posix_sem.h"
+#if defined(_WINDOWS_) || defined(_MSC_VER)
+# include "./win32/el_win32_sem.h"
+#elif defined(__linux__) 
+# include "./posix/el_posix_sem.h"
 #endif 
 
 extern int32_t el_sem_init(el_sem_t* sem, uint32_t value);

@@ -29,12 +29,16 @@
 #ifndef __ELIB_THREAD_HEADER_H__
 #define __ELIB_THREAD_HEADER_H__
 
-#if (defined(_WIN32) || defined(_WIN64))
-  #include "./win32/el_win32_thread.h"
-#else 
-  #include "./posix/el_posix_thread.h"
+
+#ifndef ELIB_COMMON
+# include "el_common.h"
+#endif
+
+#if defined(_WINDOWS_) || defined(_MSC_VER)
+# include "./win32/el_win32_thread.h"
+#elif defined(__linux__) 
+# include "./posix/el_posix_thread.h"
 #endif 
-#include "el_common.h"
 
 extern int32_t el_thread_create(el_thread_t* tid, 
     void (*routine)(void* arg), void* arg);
