@@ -9,8 +9,10 @@ README for elib
 * Building elib
   -------------
   *nix
-    $ cd make/gcc/ 
+    $ cd make/gcc/
     $ make
   Windows
-    \> cd make\msvc\ 
-    \> nmake
+    Step1: Setting enviroment for using MSVC
+    Step2:
+      \> cd make\msvc\
+      \> nmake
