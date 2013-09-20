@@ -27,26 +27,26 @@
 
 all:
 	chdir ..\..\elib
-	nmake -f makefile.win
-	nmake -f makefile.win install
+	nmake -f makefile.mk
+	nmake -f makefile.mk install
 	chdir ..\test
-	nmake -f makefile.win
+	nmake -f makefile.mk
 
 rebuild: clean all 
 
 install:
 	chdir ..\..\test
-	nmake -f makefile.win install
+	nmake -f makefile.mk install
 
 uninstall:
 	chdir ..\..\elib 
-	nmake -f makefile.win uninstall
+	nmake -f makefile.mk uninstall
 	chdir ..\test
-	nmake -f makefile.win uninstall
+	nmake -f makefile.mk uninstall
 
 clean:
 	chdir ..\..\elib 
-	nmake -f makefile.win clean 
+	nmake -f makefile.mk clean 
 	chdir ..\test
-	nmake -f makefile.win clean
+	nmake -f makefile.mk clean
 	chdir ..\make\msvc
