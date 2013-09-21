@@ -67,10 +67,12 @@ el_sem_trywait(el_sem_t* sem)
 {
   DWORD ret = WaitForSingleObject(*sem, 0);
 
-  if (WAIT_OBJECT_0 == ret)
+  if (WAIT_OBJECT_0 == ret) {
     return EL_OK;
-  else if (WAIT_TIMEOUT == ret)
+  }
+  else if (WAIT_TIMEOUT == ret) {
     return EL_NO;
+  }
   else {
     abort();
     return EL_NO;
