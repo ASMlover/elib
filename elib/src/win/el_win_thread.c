@@ -83,8 +83,9 @@ el_thread_self(void)
 int32_t 
 el_thread_join(el_thread_t* tid) 
 {
-  if (WaitForSingleObject(*tid, INFINITE))
+  if (WaitForSingleObject(*tid, INFINITE)) {
     return EL_NO;
+  }
   else {
     CloseHandle(*tid);
     *tid = NULL;
