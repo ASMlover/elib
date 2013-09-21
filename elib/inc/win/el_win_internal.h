@@ -26,26 +26,15 @@
  * ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
-#include <windows.h>
-#include "../../inc/win32/el_win32_internal.h"
+#ifndef __ELIB_WIN_INTERNAL_HEADER_H__
+#define __ELIB_WIN_INTERNAL_HEADER_H__
+
+typedef struct win32_version_s {
+  unsigned int major;
+  unsigned int minor;
+} win32_version_t;
 
 
-win32_version_t* 
-win32_get_version(void)
-{
-  static win32_version_t version;
-  static int has_got = 0;
+extern win32_version_t* win32_get_version(void);
 
-  if (!has_got) {
-    OSVERSIONINFO osv;
-    osv.dwOSVersionInfoSize = sizeof(osv);
-    GetVersionEx(&osv);
-
-    version.major = (unsigned int)osv.dwMajorVersion;
-    version.minor = (unsigned int)osv.dwMinorVersion;
-
-    has_got = 1;
-  }
-
-  return &version;
-}
+#endif  /* __ELIB_WIN_INTERNAL_HEADER_H__ */

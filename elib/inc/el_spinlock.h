@@ -35,7 +35,7 @@
 
 
 #if defined(_WINDOWS_) || defined(_MSC_VER)
-# include "./win32/el_win32_spinlock.h"
+# include "./win/el_win_spinlock.h"
 #elif defined(__linux__) 
 # include "./posix/el_posix_spinlock.h"
 #endif 

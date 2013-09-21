@@ -26,15 +26,20 @@
  * ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
-#ifndef __ELIB_WIN32_INTERNAL_HEADER_H__
-#define __ELIB_WIN32_INTERNAL_HEADER_H__
+#ifndef __ELIB_WIN_RWLOCK_HEADER_H__
+#define __ELIB_WIN_RWLOCK_HEADER_H__ 
 
-typedef struct win32_version_s {
-  unsigned int major;
-  unsigned int minor;
-} win32_version_t;
+#include <windows.h>
 
+typedef union el_rwlock_u {
+#if (_MSC_VER >= 1600)
+  SRWLOCK srwlock;
+#endif
+  struct {
+    CRITICAL_SECTION rd_mutex;
+    CRITICAL_SECTION wr_mutex;
+    unsigned int     num_readers;
+  } self_rwlock;
+} el_rwlock_t;
 
-extern win32_version_t* win32_get_version(void);
-
-#endif  /* __ELIB_WIN32_INTERNAL_HEADER_H__ */
+#endif  /* __ELIB_WIN_RWLOCK_HEADER_H__ */

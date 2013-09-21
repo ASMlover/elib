@@ -34,7 +34,7 @@
 #endif 
 
 #if defined(_WINDOWS_) || defined(_MSC_VER)
-# include "./win32/el_win32_mutex.h"
+# include "./win/el_win_mutex.h"
 #elif defined(__linux__)
 # include "./posix/el_posix_mutex.h"
 #endif

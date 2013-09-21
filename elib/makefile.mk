@@ -38,14 +38,14 @@ CFLAGS	= -O2 -W3 -MD -GS -Zi -Fd"vc.pdb" -DNDEBUG\
 	-D_CRT_SECURE_NO_DEPRECATE -D_CRT_NONSTDC_NO_WARNINGS
 ELIB_OBJS = el_error.obj\
 	el_time.obj\
-	el_win32_time.obj\
-	el_win32_internal.obj\
-	el_win32_mutex.obj\
-	el_win32_rwlock.obj\
-	el_win32_sem.obj\
-	el_win32_cond.obj\
-	el_win32_thread.obj\
-	el_win32_spinlock.obj
+	el_win_time.obj\
+	el_win_internal.obj\
+	el_win_mutex.obj\
+	el_win_rwlock.obj\
+	el_win_sem.obj\
+	el_win_cond.obj\
+	el_win_thread.obj\
+	el_win_spinlock.obj
 
 
 all: lib 
@@ -73,5 +73,5 @@ $(ELIB_OUT): $(ELIB_OBJS)
 {./src}.c{}.obj:
 	$(CC) $(CFLAGS) $<
 
-{./src/win32}.c{}.obj:
+{./src/win}.c{}.obj:
 	$(CC) $(CFLAGS) $<

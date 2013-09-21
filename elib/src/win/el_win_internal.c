@@ -26,21 +26,26 @@
  * ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
-#ifndef __ELIB_WIN32_COND_HEADER_H__
-#define __ELIB_WIN32_COND_HEADER_H__ 
-
 #include <windows.h>
+#include "../../inc/win/el_win_internal.h"
 
-typedef union el_cond_u {
-#if (_MSC_VER >= 1500)
-  CONDITION_VARIABLE cond_var;
-#endif 
-  struct {
-    unsigned int     waiters_count;
-    CRITICAL_SECTION waiters_count_lock;
-    HANDLE           signal_event;
-    HANDLE           broadcast_event;
-  } self_cond;
-} el_cond_t;
 
-#endif  /* __ELIB_WIN32_COND_HEADER_H__ */
+win32_version_t* 
+win32_get_version(void)
+{
+  static win32_version_t version;
+  static int has_got = 0;
+
+  if (!has_got) {
+    OSVERSIONINFO osv;
+    osv.dwOSVersionInfoSize = sizeof(osv);
+    GetVersionEx(&osv);
+
+    version.major = (unsigned int)osv.dwMajorVersion;
+    version.minor = (unsigned int)osv.dwMinorVersion;
+
+    has_got = 1;
+  }
+
+  return &version;
+}

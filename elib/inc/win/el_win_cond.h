@@ -26,11 +26,21 @@
  * ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
-#ifndef __ELIB_WIN32_SEM_HEADER_H__
-#define __ELIB_WIN32_SEM_HEADER_H__
+#ifndef __ELIB_WIN_COND_HEADER_H__
+#define __ELIB_WIN_COND_HEADER_H__ 
 
 #include <windows.h>
 
-typedef HANDLE el_sem_t;
+typedef union el_cond_u {
+#if (_MSC_VER >= 1500)
+  CONDITION_VARIABLE cond_var;
+#endif 
+  struct {
+    unsigned int     waiters_count;
+    CRITICAL_SECTION waiters_count_lock;
+    HANDLE           signal_event;
+    HANDLE           broadcast_event;
+  } self_cond;
+} el_cond_t;
 
-#endif  /* __ELIB_WIN32_SEM_HEADER_H__ */
+#endif  /* __ELIB_WIN_COND_HEADER_H__ */

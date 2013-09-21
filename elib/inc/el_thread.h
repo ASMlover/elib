@@ -35,7 +35,7 @@
 #endif
 
 #if defined(_WINDOWS_) || defined(_MSC_VER)
-# include "./win32/el_win32_thread.h"
+# include "./win/el_win_thread.h"
 #elif defined(__linux__) 
 # include "./posix/el_posix_thread.h"
 #endif 

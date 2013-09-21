@@ -26,7 +26,7 @@
  * ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
-#include "../../inc/win32/el_win32_internal.h"
+#include "../../inc/win/el_win_internal.h"
 #include "../../inc/el_error.h"
 #include "../../inc/el_cond.h" 
 

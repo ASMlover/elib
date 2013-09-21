@@ -26,11 +26,11 @@
  * ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
-#ifndef __ELIB_WIN32_SPINLOCK_HEADER_H__
-#define __ELIB_WIN32_SPINLOCK_HEADER_H__
+#ifndef __ELIB_WIN_SEM_HEADER_H__
+#define __ELIB_WIN_SEM_HEADER_H__
 
 #include <windows.h>
 
-typedef CRITICAL_SECTION el_spinlock_t;
+typedef HANDLE el_sem_t;
 
-#endif  /* __ELIB_WIN32_SPINLOCK_HEADER_H__ */
+#endif  /* __ELIB_WIN_SEM_HEADER_H__ */
