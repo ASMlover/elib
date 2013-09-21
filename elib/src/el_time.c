@@ -36,8 +36,9 @@
 int32_t 
 el_localtime(el_time_t* time)
 {
-  if (NULL == time)
+  if (NULL == time) {
     return EL_EINVALID;
+  }
   else {
     struct timeb tb;
     struct tm*   now;
