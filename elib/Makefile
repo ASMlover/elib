@@ -34,15 +34,8 @@ RD	= rm -rf
 MD	= mkdir -p
 CP	= cp 
 CFLAGS	= -g -O2 -Wall 
-ELIB_OBJS = ./src/el_error.o\
-	./src/el_time.o\
-	./src/posix/el_posix_time.o\
-	./src/posix/el_posix_mutex.o\
-	./src/posix/el_posix_rwlock.o\
-	./src/posix/el_posix_sem.o\
-	./src/posix/el_posix_cond.o\
-	./src/posix/el_posix_thread.o\
-	./src/posix/el_posix_spinlock.o
+ELIB_OBJS = $(patsubst %.c, %.o, $(wildcard ./src/*.c ./src/posix/*.c))
+
 
 
 all: lib 

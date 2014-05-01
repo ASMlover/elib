@@ -36,8 +36,7 @@ RM	= rm
 MD	= mkdir -p
 RD	= rm -rf
 CP	= cp 
-TEST_OBJS = el_test_main.o\
-	el_test_time.o
+TEST_OBJS = $(patsubst %.c, %.o, $(wildcard *.c))
 
 
 
