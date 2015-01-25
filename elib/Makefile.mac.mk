@@ -25,27 +25,18 @@
 # ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 # POSSIBILITY OF SUCH DAMAGE.
 
-ELIB_OUT = evil.lib
+ELIB_OUT = libevil.a
 ELIB_DIR = lib 
-CC	= cl -c -nologo
-AR	= lib -nologo
-RM	= del 
-RD	= rd /s /q
-MD	= mkdir
-CP	= copy
-LINK	= link -nologo
-CFLAGS	= -O2 -W3 -MD -GS -Zi -Fd"vc.pdb" -DNDEBUG\
-	-D_CRT_SECURE_NO_DEPRECATE -D_CRT_NONSTDC_NO_WARNINGS
-ELIB_OBJS = el_error.obj\
-	el_time.obj\
-	el_win_time.obj\
-	el_win_internal.obj\
-	el_win_mutex.obj\
-	el_win_rwlock.obj\
-	el_win_sem.obj\
-	el_win_cond.obj\
-	el_win_thread.obj\
-	el_win_spinlock.obj
+CC	= gcc 
+AR	= ar 
+RM	= rm 
+RD	= rm -rf
+MD	= mkdir -p
+CP	= cp 
+CFLAGS	= -g -O2 -Wall 
+ELIB_OBJS = $(patsubst %.c, %.o, $(wildcard ./src/*.c ./src/posix/*.c))
+
+
 
 
 all: lib 
@@ -55,23 +46,20 @@ lib: $(ELIB_OUT)
 rebuild: clean all
 
 install:
-	if not exist $(ELIB_DIR) $(MD) $(ELIB_DIR)
+	$(MD) $(ELIB_DIR)
 	$(CP) $(ELIB_OUT) $(ELIB_DIR)
 
 uninstall:
-	if exist $(ELIB_DIR) $(RD) $(ELIB_DIR)
+	$(RD) $(ELIB_DIR)
 
 clean:
-	$(RM) $(ELIB_OBJS) $(ELIB_OUT) *.pdb
+	$(RM) $(ELIB_OBJS) $(ELIB_OUT)
 
 
 
 
 $(ELIB_OUT): $(ELIB_OBJS)
-	$(AR) -out:$(ELIB_OUT) $(ELIB_OBJS)
+	$(AR) -cru $@ $^
 
-{./src}.c{}.obj:
-	$(CC) $(CFLAGS) $<
-
-{./src/win}.c{}.obj:
-	$(CC) $(CFLAGS) $<
+$(ELIB_OBJS): %.o: %.c
+	$(CC) -o $*.o -c $(CFLAGS) $^
