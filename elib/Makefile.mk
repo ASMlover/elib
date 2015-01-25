@@ -25,43 +25,55 @@
 # ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 # POSSIBILITY OF SUCH DAMAGE.
 
-BIN_OUT	= elib-test
-BIN_DIR	= ../bin 
-CC	= gcc
-CFLAGS   += -g -O2 -Wall 
-INCLUDES += -I../elib/inc 
-LDDIRS	= -L../elib/lib
-LDFLAGS = -levil
-RM	= rm 
-MD	= mkdir -p
-RD	= rm -rf
-CP	= cp 
-TEST_OBJS = $(patsubst %.c, %.o, $(wildcard *.c))
+ELIB_OUT = evil.lib
+ELIB_DIR = lib 
+CC	= cl -c -nologo
+AR	= lib -nologo
+RM	= del 
+RD	= rd /s /q
+MD	= mkdir
+CP	= copy
+LINK	= link -nologo
+CFLAGS	= -O2 -W3 -MD -GS -Zi -Fd"vc.pdb" -DNDEBUG\
+	-D_CRT_SECURE_NO_DEPRECATE -D_CRT_NONSTDC_NO_WARNINGS
+ELIB_OBJS = el_error.obj\
+	el_time.obj\
+	el_win_time.obj\
+	el_win_internal.obj\
+	el_win_mutex.obj\
+	el_win_rwlock.obj\
+	el_win_sem.obj\
+	el_win_cond.obj\
+	el_win_thread.obj\
+	el_win_spinlock.obj
 
 
 
 
-all: bin 
+all: lib 
 
-bin: $(BIN_OUT)
+lib: $(ELIB_OUT)
 
-rebuild: clean all 
+rebuild: clean all
 
 install:
-	$(MD) $(BIN_DIR)
-	$(CP) $(BIN_OUT) $(BIN_DIR)
+	if not exist $(ELIB_DIR) $(MD) $(ELIB_DIR)
+	$(CP) $(ELIB_OUT) $(ELIB_DIR)
 
 uninstall:
-	$(RD) $(BIN_DIR)
+	if exist $(ELIB_DIR) $(RD) $(ELIB_DIR)
 
 clean:
-	$(RM) $(TEST_OBJS) $(BIN_OUT)
+	$(RM) $(ELIB_OBJS) $(ELIB_OUT) *.pdb
 
 
 
 
-$(BIN_OUT): $(TEST_OBJS)
-	$(CC) -o $@ $^ $(LDDIRS) $(LDFLAGS)
+$(ELIB_OUT): $(ELIB_OBJS)
+	$(AR) -out:$(ELIB_OUT) $(ELIB_OBJS)
 
-$(TEST_OBJS): %.o: %.c
-	$(CC) -o $*.o -c $(CFLAGS) $(INCLUDES) $^
+{./src}.c{}.obj:
+	$(CC) $(CFLAGS) $<
+
+{./src/win}.c{}.obj:
+	$(CC) $(CFLAGS) $<
